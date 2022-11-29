@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -17,21 +16,23 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
-import groovy.json.JsonSlurper
+
+GlobalVariable.title = 'farah'
+
+response = WS.sendRequest(findTestObject('albums/POST albums'))
+
+WS.verifyResponseStatusCode(response, 201)
+WS.verifyElementPropertyValue(response, 'title', 'farah')
+getID = WS.getElementPropertyValue(response, 'id')
+println(getID)
 
 
-response = WS.sendRequestAndVerify(findTestObject('posts/GET posts'))
+GlobalVariable.title = 'camilla'
 
-WS.verifyResponseStatusCode(response, 200)
+response1 = WS.sendRequest(findTestObject('albums/POST albums'))
 
-
-WS.verifyElementPropertyValue(response, '[0].userId', '1')
-WS.verifyElementPropertyValue(response, '[0].id', '1')
-WS.verifyElementPropertyValue(response, '[0].title', 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit')
-WS.verifyElementPropertyValue(response, '[0].body', 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto')
-WS.verifyElementPropertyValue(response, '[1].userId', '1')
-WS.verifyElementPropertyValue(response, '[1].id', '2')
-WS.verifyElementPropertyValue(response, '[1].title', 'qui est esse')
-WS.verifyElementPropertyValue(response, '[1].body', 'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla')
-
+WS.verifyResponseStatusCode(response1, 201)
+WS.verifyElementPropertyValue(response1, 'title', 'camilla')
+getID = WS.getElementPropertyValue(response1, 'id')
+println(getID)
 
