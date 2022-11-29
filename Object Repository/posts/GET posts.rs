@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>posts-POST request</name>
+   <name>GET posts</name>
    <tag></tag>
-   <elementGuidId>786ca2ae-da70-4efa-8030-cdd187b1d571</elementGuidId>
+   <elementGuidId>3f509e68-9532-4df7-b951-6de6eebf8c45</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <connectionTimeout>-1</connectionTimeout>
    <followRedirects>false</followRedirects>
    <httpBody></httpBody>
-   <httpBodyContent>{
-  &quot;text&quot;: &quot;\n  {\n    \&quot;title\&quot;: \&quot;farah\&quot;,\n    \&quot;body\&quot;: \&quot;satu\&quot;,\n    \&quot;userId\&quot;: \&quot;1\&quot;\n  }&quot;,
-  &quot;contentType&quot;: &quot;application/json&quot;,
-  &quot;charset&quot;: &quot;UTF-8&quot;
-}</httpBodyContent>
-   <httpBodyType>text</httpBodyType>
-   <httpHeaderProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>Content-Type</name>
-      <type>Main</type>
-      <value>application/json</value>
-      <webElementGuid>01a7d4cf-d308-4248-9c67-5c3a946354e5</webElementGuid>
-   </httpHeaderProperties>
+   <httpBodyContent></httpBodyContent>
+   <httpBodyType></httpBodyType>
    <katalonVersion>8.5.2</katalonVersion>
    <maxResponseSize>-1</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
-   <restRequestMethod>POST</restRequestMethod>
+   <restRequestMethod>GET</restRequestMethod>
    <restUrl>https://jsonplaceholder.typicode.com/posts</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
@@ -50,13 +38,20 @@ RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
 
+WS.verifyResponseStatusCode(response, 200)
 
-WS.verifyResponseStatusCode(response, 201)
+assertThat(response.getStatusCode()).isEqualTo(200)
 
-assertThat(response.getStatusCode()).isEqualTo(201)
+WS.verifyElementPropertyValue(response, '[0].userId', '1')
+WS.verifyElementPropertyValue(response, '[0].id', '1')
+WS.verifyElementPropertyValue(response, '[0].title', 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit')
+WS.verifyElementPropertyValue(response, '[0].body', 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto')
+WS.verifyElementPropertyValue(response, '[1].userId', '1')
+WS.verifyElementPropertyValue(response, '[1].id', '2')
+WS.verifyElementPropertyValue(response, '[1].title', 'qui est esse')
+WS.verifyElementPropertyValue(response, '[1].body', 'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla')
 
-WS.verifyElementPropertyValue(response, 'title', 'farah')
-WS.verifyElementPropertyValue(response, 'body', 'satu')
-WS.verifyElementPropertyValue(response, 'userId', '1')</verificationScript>
+
+</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>
