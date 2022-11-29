@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -19,32 +18,11 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import groovy.json.JsonSlurper
 
+response = WS.sendRequestAndVerify(findTestObject('comment/DELETE comment'))
 
 
-GlobalVariable.title = 'farah'
-GlobalVariable.body_post = 'post request katalon api 1'
-
-response = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
-
-WS.verifyResponseStatusCode(response, 201)
-
-WS.verifyElementPropertyValue(response, 'title', 'farah')
-WS.verifyElementPropertyValue(response, 'body', 'post request katalon api 1')
-WS.verifyElementPropertyValue(response, 'userId', '1')
-getID = WS.getElementPropertyValue(response, 'id')
-println(getID)
 
 
-GlobalVariable.title = 'camilla'
-GlobalVariable.body_post = 'post request katalon api 2'
 
-response1 = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
-
-WS.verifyResponseStatusCode(response1, 201)
-
-WS.verifyElementPropertyValue(response1, 'title', 'camilla')
-WS.verifyElementPropertyValue(response1, 'body', 'post request katalon api 2')
-WS.verifyElementPropertyValue(response1, 'userId', '1')
-getID = WS.getElementPropertyValue(response1, 'id')
-println(getID)
+WS.verifyResponseStatusCode(response, 200)
 

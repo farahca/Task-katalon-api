@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>POST posts</name>
+   <name>POST comment</name>
    <tag></tag>
-   <elementGuidId>786ca2ae-da70-4efa-8030-cdd187b1d571</elementGuidId>
+   <elementGuidId>dced9ff6-b880-4893-bbdd-978afce9da94</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <connectionTimeout>-1</connectionTimeout>
    <followRedirects>false</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n   \&quot;title\&quot;: \&quot;${GlobalVariable.title}\&quot;,\n   \&quot;body\&quot;: \&quot;${GlobalVariable.body_post}\&quot;,\n   \&quot;userId\&quot;: 1\n}\n\n&quot;,
+  &quot;text&quot;: &quot;{\n  \&quot;postId\&quot;: 1,\n   \&quot;name\&quot;: \&quot;${GlobalVariable.name}\&quot;,\n    \&quot;email\&quot;: \&quot;${GlobalVariable.email}\&quot;,\n    \&quot;body\&quot;: \&quot;${GlobalVariable.body_comment}\&quot;\n}\n\n&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -21,13 +21,13 @@
       <name>Content-Type</name>
       <type>Main</type>
       <value>application/json</value>
-      <webElementGuid>01a7d4cf-d308-4248-9c67-5c3a946354e5</webElementGuid>
+      <webElementGuid>2fb05545-617b-4f05-8e9a-a9fb12a15c0f</webElementGuid>
    </httpHeaderProperties>
    <katalonVersion>8.5.2</katalonVersion>
    <maxResponseSize>-1</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>POST</restRequestMethod>
-   <restUrl>https://jsonplaceholder.typicode.com/posts</restUrl>
+   <restUrl>https://jsonplaceholder.typicode.com/comments</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
@@ -55,9 +55,9 @@ WS.verifyResponseStatusCode(response, 201)
 
 assertThat(response.getStatusCode()).isEqualTo(201)
 
-
 getID = WS.getElementPropertyValue(response, 'id')
 println(getID)
+
 
 </verificationScript>
    <wsdlAddress></wsdlAddress>

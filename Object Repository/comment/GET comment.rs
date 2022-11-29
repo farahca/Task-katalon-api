@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>POST posts</name>
+   <name>GET comment</name>
    <tag></tag>
-   <elementGuidId>786ca2ae-da70-4efa-8030-cdd187b1d571</elementGuidId>
+   <elementGuidId>88577c9b-fa23-4ede-b70e-0fe1336f34ce</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <connectionTimeout>-1</connectionTimeout>
    <followRedirects>false</followRedirects>
    <httpBody></httpBody>
-   <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n   \&quot;title\&quot;: \&quot;${GlobalVariable.title}\&quot;,\n   \&quot;body\&quot;: \&quot;${GlobalVariable.body_post}\&quot;,\n   \&quot;userId\&quot;: 1\n}\n\n&quot;,
-  &quot;contentType&quot;: &quot;application/json&quot;,
-  &quot;charset&quot;: &quot;UTF-8&quot;
-}</httpBodyContent>
-   <httpBodyType>text</httpBodyType>
-   <httpHeaderProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>Content-Type</name>
-      <type>Main</type>
-      <value>application/json</value>
-      <webElementGuid>01a7d4cf-d308-4248-9c67-5c3a946354e5</webElementGuid>
-   </httpHeaderProperties>
+   <httpBodyContent></httpBodyContent>
+   <httpBodyType></httpBodyType>
    <katalonVersion>8.5.2</katalonVersion>
    <maxResponseSize>-1</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
-   <restRequestMethod>POST</restRequestMethod>
-   <restUrl>https://jsonplaceholder.typicode.com/posts</restUrl>
+   <restRequestMethod>GET</restRequestMethod>
+   <restUrl>https://jsonplaceholder.typicode.com/comments</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
@@ -51,14 +39,21 @@ RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
 
 
-WS.verifyResponseStatusCode(response, 201)
+WS.verifyResponseStatusCode(response, 200)
 
-assertThat(response.getStatusCode()).isEqualTo(201)
+assertThat(response.getStatusCode()).isEqualTo(200)
 
+WS.verifyElementPropertyValue(response, '[0].postId', '1')
+WS.verifyElementPropertyValue(response, '[0].id', '1')
+WS.verifyElementPropertyValue(response, '[0].name', 'id labore ex et quam laborum')
+WS.verifyElementPropertyValue(response, '[0].email', 'Eliseo@gardner.biz')
+WS.verifyElementPropertyValue(response, '[0].body', 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium')
 
-getID = WS.getElementPropertyValue(response, 'id')
-println(getID)
-
+WS.verifyElementPropertyValue(response, '[1].postId', '1')
+WS.verifyElementPropertyValue(response, '[1].id', '2')
+WS.verifyElementPropertyValue(response, '[1].name', 'quo vero reiciendis velit similique earum')
+WS.verifyElementPropertyValue(response, '[1].email', 'Jayne_Kuhic@sydney.com')
+WS.verifyElementPropertyValue(response, '[1].body', 'est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et')
 </verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>

@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -19,32 +18,20 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import groovy.json.JsonSlurper
 
+response = WS.sendRequestAndVerify(findTestObject('comment/GET comment'))
 
+WS.verifyResponseStatusCode(response, 200)
 
-GlobalVariable.title = 'farah'
-GlobalVariable.body_post = 'post request katalon api 1'
+WS.verifyElementPropertyValue(response, '[0].postId', '1')
+WS.verifyElementPropertyValue(response, '[0].id', '1')
+WS.verifyElementPropertyValue(response, '[0].name', 'id labore ex et quam laborum')
+WS.verifyElementPropertyValue(response, '[0].email', 'Eliseo@gardner.biz')
+WS.verifyElementPropertyValue(response, '[0].body', 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium')
 
-response = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
+WS.verifyElementPropertyValue(response, '[1].postId', '1')
+WS.verifyElementPropertyValue(response, '[1].id', '2')
+WS.verifyElementPropertyValue(response, '[1].name', 'quo vero reiciendis velit similique earum')
+WS.verifyElementPropertyValue(response, '[1].email', 'Jayne_Kuhic@sydney.com')
+WS.verifyElementPropertyValue(response, '[1].body', 'est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et')
 
-WS.verifyResponseStatusCode(response, 201)
-
-WS.verifyElementPropertyValue(response, 'title', 'farah')
-WS.verifyElementPropertyValue(response, 'body', 'post request katalon api 1')
-WS.verifyElementPropertyValue(response, 'userId', '1')
-getID = WS.getElementPropertyValue(response, 'id')
-println(getID)
-
-
-GlobalVariable.title = 'camilla'
-GlobalVariable.body_post = 'post request katalon api 2'
-
-response1 = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
-
-WS.verifyResponseStatusCode(response1, 201)
-
-WS.verifyElementPropertyValue(response1, 'title', 'camilla')
-WS.verifyElementPropertyValue(response1, 'body', 'post request katalon api 2')
-WS.verifyElementPropertyValue(response1, 'userId', '1')
-getID = WS.getElementPropertyValue(response1, 'id')
-println(getID)
 
