@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -19,30 +18,16 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import groovy.json.JsonSlurper
 
-GlobalVariable.title = 'farah'
-GlobalVariable.body_post = 'post request katalon api 1'
+response = WS.sendRequestAndVerify(findTestObject('todos/GET todos'))
 
-response = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
+WS.verifyResponseStatusCode(response, 200)
 
-WS.verifyResponseStatusCode(response, 201)
+WS.verifyElementPropertyValue(response, '[0].userId', '1')
+WS.verifyElementPropertyValue(response, '[0].id', '1')
+WS.verifyElementPropertyValue(response, '[0].title', 'delectus aut autem')
+WS.verifyElementPropertyValue(response, '[0].completed', 'false')
 
-WS.verifyElementPropertyValue(response, 'title', 'farah')
-WS.verifyElementPropertyValue(response, 'body', 'post request katalon api 1')
-WS.verifyElementPropertyValue(response, 'userId', '1')
-getID = WS.getElementPropertyValue(response, 'id')
-println(getID)
-
-
-GlobalVariable.title = 'camilla'
-GlobalVariable.body_post = 'post request katalon api 2'
-
-response1 = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
-
-WS.verifyResponseStatusCode(response1, 201)
-
-WS.verifyElementPropertyValue(response1, 'title', 'camilla')
-WS.verifyElementPropertyValue(response1, 'body', 'post request katalon api 2')
-WS.verifyElementPropertyValue(response1, 'userId', '1')
-getID = WS.getElementPropertyValue(response1, 'id')
-println(getID)
-
+WS.verifyElementPropertyValue(response, '[1].userId', '1')
+WS.verifyElementPropertyValue(response, '[1].id', '2')
+WS.verifyElementPropertyValue(response, '[1].title', 'quis ut nam facilis et officia qui')
+WS.verifyElementPropertyValue(response, '[1].completed', 'false')

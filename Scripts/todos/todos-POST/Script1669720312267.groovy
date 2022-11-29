@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -19,30 +18,28 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import groovy.json.JsonSlurper
 
-GlobalVariable.title = 'farah'
-GlobalVariable.body_post = 'post request katalon api 1'
+GlobalVariable.title = 'first'
+GlobalVariable.completed = 'true'
 
-response = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
+response = WS.sendRequestAndVerify(findTestObject('todos/POST todos'))
 
 WS.verifyResponseStatusCode(response, 201)
 
-WS.verifyElementPropertyValue(response, 'title', 'farah')
-WS.verifyElementPropertyValue(response, 'body', 'post request katalon api 1')
+WS.verifyElementPropertyValue(response, 'title', 'first')
+WS.verifyElementPropertyValue(response, 'completed', 'true')
 WS.verifyElementPropertyValue(response, 'userId', '1')
 getID = WS.getElementPropertyValue(response, 'id')
 println(getID)
 
+GlobalVariable.title = 'second'
+GlobalVariable.completed = 'false'
 
-GlobalVariable.title = 'camilla'
-GlobalVariable.body_post = 'post request katalon api 2'
-
-response1 = WS.sendRequestAndVerify(findTestObject('posts/POST posts'))
+response1 = WS.sendRequestAndVerify(findTestObject('todos/POST todos'))
 
 WS.verifyResponseStatusCode(response1, 201)
 
-WS.verifyElementPropertyValue(response1, 'title', 'camilla')
-WS.verifyElementPropertyValue(response1, 'body', 'post request katalon api 2')
+WS.verifyElementPropertyValue(response1, 'title', 'second')
+WS.verifyElementPropertyValue(response1, 'completed', 'false')
 WS.verifyElementPropertyValue(response1, 'userId', '1')
 getID = WS.getElementPropertyValue(response1, 'id')
 println(getID)
-
