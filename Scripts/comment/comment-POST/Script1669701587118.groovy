@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -17,21 +16,33 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
-import groovy.json.JsonSlurper
 
 
-response = WS.sendRequestAndVerify(findTestObject('posts/GET posts'))
+GlobalVariable.name = 'farah camilla'
+GlobalVariable.email = 'email123@example.com'
+GlobalVariable.body_comment = 'Comment untuk assignment katalon'
 
-WS.verifyResponseStatusCode(response, 200)
+response = WS.sendRequest(findTestObject('comment/POST comment'))
+
+WS.verifyResponseStatusCode(response, 201)
+
+WS.verifyElementPropertyValue(response, 'name ', 'farah camilla')
+WS.verifyElementPropertyValue(response, 'email', 'email123@example.com')
+WS.verifyElementPropertyValue(response, 'body', 'Comment untuk assignment katalon')
+getID = WS.getElementPropertyValue(response, 'id')
+println(getID)
 
 
-WS.verifyElementPropertyValue(response, '[0].userId', '1')
-WS.verifyElementPropertyValue(response, '[0].id', '1')
-WS.verifyElementPropertyValue(response, '[0].title', 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit')
-WS.verifyElementPropertyValue(response, '[0].body', 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto')
-WS.verifyElementPropertyValue(response, '[1].userId', '1')
-WS.verifyElementPropertyValue(response, '[1].id', '2')
-WS.verifyElementPropertyValue(response, '[1].title', 'qui est esse')
-WS.verifyElementPropertyValue(response, '[1].body', 'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla')
+GlobalVariable.name = 'fulan bin fulan'
+GlobalVariable.email = 'email345@example.com'
+GlobalVariable.body_comment = 'Komen 2 untuk assignment katalon api'
 
+response1 = WS.sendRequest(findTestObject('comment/POST comment'))
 
+WS.verifyResponseStatusCode(response1, 201)
+
+WS.verifyElementPropertyValue(response1, 'name ', 'fulan bin fulan')
+WS.verifyElementPropertyValue(response1, 'email', 'email345@example.com')
+WS.verifyElementPropertyValue(response1, 'body', 'Komen 2 untuk assignment katalon api')
+getID = WS.getElementPropertyValue(response1, 'id')
+println(getID)

@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -17,21 +16,34 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
-import groovy.json.JsonSlurper
 
 
-response = WS.sendRequestAndVerify(findTestObject('posts/GET posts'))
 
-WS.verifyResponseStatusCode(response, 200)
+GlobalVariable.title = 'album pertama'
+GlobalVariable.url = 'https://via.placeholder.com/2300/9fsdfc952'
+GlobalVariable.thumbnailUrl = 'https://via.placeholder.com/150/ees4552'
+
+response = WS.sendRequest(findTestObject('photos/POST photos'))
+
+WS.verifyResponseStatusCode(response, 201)
+
+WS.verifyElementPropertyValue(response, 'title', 'album pertama')
+WS.verifyElementPropertyValue(response, 'url', 'https://via.placeholder.com/2300/9fsdfc952')
+WS.verifyElementPropertyValue(response, 'thumbnailUrl', 'https://via.placeholder.com/150/ees4552')
+getID = WS.getElementPropertyValue(response, 'id')
+println(getID)
 
 
-WS.verifyElementPropertyValue(response, '[0].userId', '1')
-WS.verifyElementPropertyValue(response, '[0].id', '1')
-WS.verifyElementPropertyValue(response, '[0].title', 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit')
-WS.verifyElementPropertyValue(response, '[0].body', 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto')
-WS.verifyElementPropertyValue(response, '[1].userId', '1')
-WS.verifyElementPropertyValue(response, '[1].id', '2')
-WS.verifyElementPropertyValue(response, '[1].title', 'qui est esse')
-WS.verifyElementPropertyValue(response, '[1].body', 'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla')
+GlobalVariable.title = 'album kedua'
+GlobalVariable.url = 'https://via.placeholder.com/2300/09302jkaj'
+GlobalVariable.thumbnailUrl = 'https://via.placeholder.com/150/9833jkka'
 
+response1 = WS.sendRequest(findTestObject('photos/POST photos'))
 
+WS.verifyResponseStatusCode(response1, 201)
+
+WS.verifyElementPropertyValue(response1, 'title', 'album kedua')
+WS.verifyElementPropertyValue(response1, 'url', 'https://via.placeholder.com/2300/09302jkaj')
+WS.verifyElementPropertyValue(response1, 'thumbnailUrl', 'https://via.placeholder.com/150/9833jkka')
+getID = WS.getElementPropertyValue(response, 'id')
+println(getID)
